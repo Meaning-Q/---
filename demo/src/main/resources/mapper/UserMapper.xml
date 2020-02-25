@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mapper.UserMapper">
+	<select id="queryTotal" resultType="Integer">
+		select count(user_id) from user
+	</select>
+	<select id="query" resultType="User">
+		select * from user limit #{start},#{rows}
+	</select>
+	<insert id="add" parameterType="User">
+		insert into user(
+			user_id,
+			user_name,
+			user_password,
+			user_email
+		)values(
+			#{userId},
+			#{userName},
+			#{userPassword},
+			#{userEmail}
+		)
+	</insert>
+	<update id="update" parameterType="User">
+		update user set
+		user_id=#{userId},
+		user_name=#{userName},
+		user_password=#{userPassword},
+		user_email=#{userEmail}
+		where user_name=#{userName};
+	</update>
+	<delete id="delete" parameterType="String">
+		delete from user where user_name=#{userName}
+	</delete>
+</mapper> 
+
+
+
+
